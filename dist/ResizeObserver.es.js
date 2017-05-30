@@ -183,7 +183,12 @@ var throttle = function (callback, delay) {
      * @returns {void}
      */
     function timeoutCallback() {
-        requestAnimationFrame$1(resolvePending);
+        let ua = window.navigator.userAgent;
+        if(ua.indexOf('Edge/') > 0 || ua.indexOf('Trident/') > 0) {
+            window.requestAnimationFrame(resolvePending);
+        } else {
+            requestAnimationFrame$1(resolvePending);
+        }
     }
 
     /**
